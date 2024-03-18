@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <title>RiceAide</title>
+</head>
+
+<body>
+  <div class="header">
+    <a href="index.html"><i class="fas fa-chevron-left" style="font-size: 36px; color: white;"></i></a>
+  </div>
+
+  <form id="expert-system-form" onsubmit="return validateForm()">
+    <div class="card-container">
+      <div class="card">
+        <div class="card-header">
+          <h5 align="justify">What kind of eating quality do you prefer?</h5>
+        </div>
+        <div class="card-body">
+          <label><input type="radio" name="eating_quality" value="soft" required> Soft</label><br>
+          <label><input type="radio" name="eating_quality" value="medium" required> Medium</label><br>
+          <label><input type="radio" name="eating_quality" value="very_soft" required> Very Soft</label><br>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 align="justify">What kind of aroma do you prefer?</h5>
+        </div>
+        <div class="card-body">
+          <label><input type="radio" name="aroma" value="mild" required> Mild</label><br>
+          <label><input type="radio" name="aroma" value="aromatic" required> Aromatic</label><br>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 align="justify">What kind of grain size do you prefer?</h5>
+        </div>
+        <div class="card-body">
+          <label><input type="radio" name="grain_size" value="short" required> Short</label><br>
+          <label><input type="radio" name="grain_size" value="medium_length" required> Medium</label><br>
+          <label><input type="radio" name="grain_size" value="long" required> Long</label><br>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 align="justify">What kind of meal type do you prefer?
+            <button type="submit" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="fa fa-question-circle" style="font-size:24px"></i>
+            </button>
+          </h5>
+        </div>
+        <div class="card-body">
+          <label><input type="radio" name="meal_type" value="main_dish" required> Main Dish</label><br>
+          <label><input type="radio" name="meal_type" value="side_dish" required> Side Dish</label><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Definition of Terms</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Main dish</strong> - main food you are eating even it's just one course (e.g. meat, pasta,
+              vegetable).</p>
+            <p><strong>Side dish</strong> - amount of a particular food that served at the same time as the main dish
+              (e.g. meat and rice).</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <br><br>
+    <center><button type="submit"
+        style="font-weight: bold; width: 100px; height: 50px; background-color: #198754; color: white;">Submit</button>
+    </center>
+    <br><br>
+  </form>
+
+</body>
+<script>
+  const form = document.getElementById('expert-system-form');
+  const recommendationEl = document.getElementById('recommendation');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const eating_quality = formData.get('eating_quality');
+    const aroma = formData.get('aroma');
+    const grain_size = formData.get('grain_size');
+    const meal_type = formData.get('meal_type');
+
+
+    if (eating_quality === 'medium' && aroma === 'mild' && grain_size === 'long' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is PSB RC 18 (ALA) and NSIC RC 216 (Tubigan 17)"); //ME, MI, LO, SD
+      window.location.replace('rc18_216.html');
+    } else if (eating_quality === 'soft' && aroma === 'mild' && grain_size === 'long' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is NSIC RC 160 (Tubigan 14), NSIC RC 402 (Tubigan 36) and NSIC RC 480 (GSR 8)"); //SO, MI, LO, SD
+      window.location = "soft_mild_long.html";
+    } else if (eating_quality === 'very_soft' && aroma === 'mild' && grain_size === 'medium_length' && meal_type === 'main_dish') {
+      recommendation = alert("The rice variety that you selected is NSIC RC 13 (Malagkit 1)");
+      window.location = "rc13.html";
+    } else if (eating_quality === 'medium' && aroma === 'mild' && grain_size === 'medium_length' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is NSIC RC 440 (Tubigan 39)");
+      window.location = "rc440.html";
+    } else if (eating_quality === 'soft' && aroma === 'aromatic' && grain_size === 'long' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Jasmine Rice, Princess Bea Special Rice, Young Chow Long Grain White Rice, Robinson's Supersavers Intan Rice, and Harvester's Sinandomeng Rice"); //SO, AR, LO, SD
+      window.location = "soft_aromatic_long.html";
+    } else if (eating_quality === 'medium' && aroma === 'aromatic' && grain_size === 'long' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Basmati Rice");
+      window.location = "nlbasmati.html";
+    } else if (eating_quality === 'soft' && aroma === 'mild' && grain_size === 'medium_length' && meal_type === 'main_dish') {
+      recommendation = alert("The rice variety that you selected is Arborio Rice");
+      window.location = "nlarborio.html";
+    } else if (eating_quality === 'medium' && aroma === 'mild' && grain_size === 'short' && meal_type === 'main_dish') {
+      recommendation = alert("The rice variety that you selected is Bomba Rice");
+      window.location = "nlbomba.html";
+    } else if (eating_quality === 'soft' && aroma === 'mild' && grain_size === 'short' && meal_type === 'main_dish') {
+      recommendation = alert("The rice variety that you selected is Japonica Rice, Innawi (Tinawon White) and Dona-al (Tinawon White)"); //SO, MI, SH, MD
+      window.location = "japowhite.html";
+    } else if (eating_quality === 'soft' && aroma === 'mild' && grain_size === 'short' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Japonica Rice");
+      window.location = "res_japo.html";
+    } else if (eating_quality === 'medium' && aroma === 'aromatic' && grain_size === 'medium_length' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Balatinaw (Black Rice)");
+      window.location = "hrblack.html";
+    } else if (eating_quality === 'soft' && aroma === 'aromatic' && grain_size === 'short' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Ing-ngudpur (Brown Rice) and Pan-Pan Dinorado Special Rice"); //SO, AR, SH, SD
+      window.location = "brown_dinoradoside.html";
+    } else if (eating_quality === 'soft' && aroma === 'aromatic' && grain_size === 'medium_length' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Kalinga Unoy (Red Rice)");
+      window.location = "hrred.html";
+    } else if (eating_quality === 'soft' && aroma === 'mild' && grain_size === 'medium_length' && meal_type === 'side_dish') {
+      recommendation = alert("The rice variety that you selected is Hope Special Stoneless Rice");
+      window.location = "bra_hope.html";
+    } else if (eating_quality === 'soft' && aroma === 'aromatic' && grain_size === 'short' && meal_type === 'main_dish') {
+      recommendation = alert("The rice variety that you selected is Pan-Pan Dinorado Special Rice");
+      window.location = "dinorado_main.html";
+    } else {
+      recommendation = alert("The rice variety based on the characteristics is not yet in the database.");
+      window.location = "recommendation.html";
+    }
+    recommendationEl.textContent = recommendation;
+  });
+
+  function validateForm() {
+    // Get all the input elements in the form
+    const inputs = document.querySelectorAll('#expert-system-form input');
+
+    // Check if all the input elements are valid
+    for (const input of inputs) {
+      if (!input.checkValidity()) {
+        // The input is invalid, so show an error message and return false
+        alert('Please fill out the form correctly');
+        return false;
+      }
+    }
+    // If all the input elements are valid, return true
+    return true;
+  }
+</script>
+<style>
+  body {
+    background-image: url('img/grain.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+
+  .modal-dialog {
+    max-width: 250px;
+    width: auto;
+  }
+
+  .modal {
+    position: fixed;
+    top: 75%;
+    left: 64%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+
+</html>
